@@ -1,0 +1,63 @@
+#
+# Common definitions for OMCISDK
+#
+
+CURR_DIR := $(shell pwd)
+OMCISDK_DIR:=$(subst /omcisdk,/omcisdk ,$(CURR_DIR))
+OMCISDK_DIR:=$(word 1, $(OMCISDK_DIR))
+
+# The standalone OMCI needs flags from CMS_COMPILE_FLAGS
+ifeq ($(strip $(BUILD_BRCM_CMS)),)
+CFLAGS += $(CMS_COMPILE_FLAGS)
+endif
+
+# Vendor specific MEs
+ifeq ($(strip $(BUILD_VENDOR_OMCI)),y)
+BUILD_VENDOR_OMCI_NAME:=$(subst ",,$(BUILD_VENDOR_OMCI_NAME))
+include $(OMCISDK_DIR)/make.$(BUILD_VENDOR_OMCI_NAME)
+endif
+
+# FTTDP
+ifeq ($(strip $(BRCM_XDSL_DISTPOINT_USE_G9991)),y)
+CFLAGS += -DG9991
+endif
+
+# 55153 DPU Support
+ifeq ($(strip $(BRCM_55153_DPU)),y)
+CFLAGS += -DBRCM_XTM_UNI
+endif
+#
+# Private apps and libs are allowed to include header files from the
+# private and public directories
+#
+# WARNING: Do not modify this section unless you understand the
+# license implications of what you are doing.
+#
+# Common
+INC_USERSPACE_PATH = -I$(BUILD_DIR)/userspace/public/include \
+                     -I$(BUILD_DIR)/userspace/public/include/$(OALDIR) \
+                     -I$(BUILD_DIR)/userspace/private/include \
+                     -I$(BUILD_DIR)/userspace/private/include/$(OALDIR) \
+                     -I$(BCM_FSBUILD_DIR)/public/include \
+                     -I$(BCM_FSBUILD_DIR)/private/include
+
+# Driver
+INC_BRCMDRIVER_PATH = -I$(INC_BRCMDRIVER_PUB_PATH)/$(BRCM_BOARD) \
+                      -I$(INC_BRCMDRIVER_PRIV_PATH)/$(BRCM_BOARD) \
+                      -I$(INC_BRCMSHARED_PUB_PATH)/$(BRCM_BOARD)
+
+# OMCI internal
+INC_OMCISDK_PUBLIC_PATH = -I$(OMCISDK_DIR)/cmninc
+
+INC_OMCISDK_PRIVATE_PATH = -I$(OMCISDK_DIR)/core/inc \
+                           -I$(OMCISDK_DIR)/core/onudata \
+                           -I$(OMCISDK_DIR)/core/handler \
+                           -I$(OMCISDK_DIR)/core/addons \
+                           -I$(OMCISDK_DIR)/core/db
+
+INC_RDPA_PUBLIC_PATH += -I$(BUILD_DIR)/rdp/drivers/rdpa_gpl/include/ \
+                        -I$(BUILD_DIR)/rdp/drivers/bdmf/framework/
+
+# treat all warnings as errors
+CUSTOM_CFLAGS += -Werror -Wfatal-errors # NEW_FORBID_WARNINGS
+

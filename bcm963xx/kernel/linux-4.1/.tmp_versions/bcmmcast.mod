@@ -1,0 +1,2 @@
+../../bcmdrivers/opensource/char/mcast/bcm96846/bcmmcast.ko
+../../bcmdrivers/opensource/char/mcast/bcm96846/bcm_mcast.o ../../bcmdrivers/opensource/char/mcast/bcm96846/bcm_mcast_netlink.o ../../bcmdrivers/opensource/char/mcast/bcm96846/bcm_mcast_if.o ../../bcmdrivers/opensource/char/mcast/bcm96846/bcm_mcast_igmp.o ../../bcmdrivers/opensource/char/mcast/bcm96846/bcm_mcast_mld.o ../../bcmdrivers/opensource/char/mcast/bcm96846/bcm_mcast_blog.o

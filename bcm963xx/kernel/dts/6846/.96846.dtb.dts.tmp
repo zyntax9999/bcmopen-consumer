@@ -1,0 +1,217 @@
+# 1 "/home/zyntax/firmwarehacks/devel/bcmopen-consumerworks/bcm963xx/kernel/dts/6846/96846.dts"
+# 1 "<built-in>"
+# 1 "<command-line>"
+# 1 "/home/zyntax/firmwarehacks/devel/bcmopen-consumerworks/bcm963xx/kernel/dts/6846/96846.dts"
+# 1 "./arch/arm/boot/dts/include/dt-bindings/interrupt-controller/arm-gic.h" 1
+
+
+
+
+
+
+
+# 1 "./arch/arm/boot/dts/include/dt-bindings/interrupt-controller/irq.h" 1
+# 9 "./arch/arm/boot/dts/include/dt-bindings/interrupt-controller/arm-gic.h" 2
+# 2 "/home/zyntax/firmwarehacks/devel/bcmopen-consumerworks/bcm963xx/kernel/dts/6846/96846.dts" 2
+
+# 1 "./arch/arm/boot/dts/include/dt-bindings/soc/bcm963xx_dt_bindings.h" 1
+# 4 "/home/zyntax/firmwarehacks/devel/bcmopen-consumerworks/bcm963xx/kernel/dts/6846/96846.dts" 2
+# 16 "/home/zyntax/firmwarehacks/devel/bcmopen-consumerworks/bcm963xx/kernel/dts/6846/96846.dts"
+# 1 "/home/zyntax/firmwarehacks/devel/bcmopen-consumerworks/bcm963xx/kernel/dts/6846/../../../shared/opensource/include/pmc/pmc_firmware_68460.h" 1
+# 17 "/home/zyntax/firmwarehacks/devel/bcmopen-consumerworks/bcm963xx/kernel/dts/6846/96846.dts" 2
+
+
+/dts-v1/;
+
+/memreserve/ 0x00000000 0x00008000;
+
+/memreserve/ (0x4001000 - 0x1000) (0x100000);
+
+# 1 "/home/zyntax/firmwarehacks/devel/bcmopen-consumerworks/bcm963xx/kernel/dts/6846/../bcm_rsvdmem_32.dtsi" 1
+
+
+
+
+
+
+/ {
+ reserved-memory {
+  #address-cells = <1>;
+  #size-cells = <1>;
+  ranges;
+# 30 "/home/zyntax/firmwarehacks/devel/bcmopen-consumerworks/bcm963xx/kernel/dts/6846/../bcm_rsvdmem_32.dtsi"
+  dt_reserved_rdp1 {
+   reg = <((0x00000000 +0x04000000)-((16)*0x100000)) ((16)*0x100000)>;
+   no-map;
+  };
+
+  dt_reserved_rdp2 {
+   reg = <(((0x00000000 +0x04000000)-((16)*0x100000))-((8)*0x100000)) ((8)*0x100000)>;
+   no-map;
+  };
+# 76 "/home/zyntax/firmwarehacks/devel/bcmopen-consumerworks/bcm963xx/kernel/dts/6846/../bcm_rsvdmem_32.dtsi"
+ };
+# 131 "/home/zyntax/firmwarehacks/devel/bcmopen-consumerworks/bcm963xx/kernel/dts/6846/../bcm_rsvdmem_32.dtsi"
+};
+# 26 "/home/zyntax/firmwarehacks/devel/bcmopen-consumerworks/bcm963xx/kernel/dts/6846/96846.dts" 2
+
+/ {
+    model = "Broadcom BCM96846";
+    compatible = "brcm,bcm96846";
+    interrupt-parent = <&gic>;
+    #address-cells = <1>;
+    #size-cells = <1>;
+
+ cpus {
+  #address-cells = <1>;
+  #size-cells = <0>;
+
+  CA7_0: cpu@0 {
+   device_type = "cpu";
+   compatible = "arm,cortex-a7";
+   reg = <0x0>;
+   next-level-cache = <&L2_0>;
+  };
+
+  CA7_1: cpu@1 {
+   device_type = "cpu";
+   compatible = "arm,cortex-a7";
+   reg = <0x1>;
+   next-level-cache = <&L2_0>;
+
+
+
+   enable-method = "brcm,bca-smp";
+
+  };
+
+  L2_0: l2-cache0 {
+   compatible = "cache";
+  };
+ };
+# 78 "/home/zyntax/firmwarehacks/devel/bcmopen-consumerworks/bcm963xx/kernel/dts/6846/96846.dts"
+ gic: interrupt-controller@81000000 {
+  compatible = "arm,cortex-a7-gic";
+  #interrupt-cells = <3>;
+  #address-cells = <0>;
+  interrupt-controller;
+  reg = <0x81001000 0x1000>,
+        <0x81002000 0x2000>;
+ };
+
+ timer {
+  compatible = "arm,armv7-timer";
+  interrupts = <1 13 ((((1 << (2)) - 1) << 8) | 8)>,
+        <1 14 ((((1 << (2)) - 1) << 8) | 8)>,
+        <1 11 ((((1 << (2)) - 1) << 8) | 8)>,
+        <1 10 ((((1 << (2)) - 1) << 8) | 8)>;
+  arm,cpu-registers-not-fw-configured = <1>;
+ };
+
+ pmu {
+  compatible = "arm,cortex-a7-pmu";
+  interrupts = <0 9 4>,
+        <0 10 4>;
+  interrupt-affinity = <&CA7_0>,
+         <&CA7_1>;
+ };
+
+ brcm-legacy {
+  compatible = "brcm,brcm-legacy";
+ };
+
+
+ chosen {
+  bootargs = "coherent_pool=2M cpuidle_sysfs_switch pci=pcie_bus_safe";
+ };
+
+ memory@00000000 {
+  device_type = "memory";
+  reg = <0x00000000 0x04000000>;
+ };
+
+
+ ubus@ff800000 {
+  compatible = "simple-bus";
+  #address-cells = <1>;
+  #size-cells = <1>;
+  ranges = <0 0xff800000 0x8000>;
+
+  nand@ff801800 {
+   #address-cells = <1>;
+   #size-cells = <0>;
+   compatible = "brcm,nand-bcm63xx", "brcm,brcmnand-v7.1";
+   reg = <0x1800 0x600>, <0x2000 0x10>;
+   reg-names = "nand", "nand-int-base";
+   status = "okay";
+
+   nandcs@0 {
+    compatible = "brcm,nandcs";
+    reg = <0>;
+    nand-on-flash-bbt;
+   };
+
+  };
+
+  watchdog@480 {
+   compatible = "brcm,bcm96xxx-wdt";
+   reg = <0x480 0x10>;
+   timeout-sec = <80>;
+  };
+
+  i2c@0xff802100 {
+   compatible = "brcm,bcm63000-i2c";
+   reg = <0x2100 0x60>;
+  };
+
+  rng: rng@ff800b80 {
+   compatible = "brcm,iproc-rng200";
+   reg = <0x00000b80 0x28>;
+  };
+ };
+
+
+ pcie0: pcie@80040000 {
+  compatible = "brcm,bcm963xx-pcie";
+  device_type = "pci";
+  reg = <0x80040000 0x0000A000>;
+
+  #address-cells = <3>;
+  #size-cells = <2>;
+
+  ranges = <0x02000000 0 0x90000000 0x90000000 0 0x10000000>;
+
+
+  interrupt-names = "intr";
+  interrupts = <0 60 4>;
+
+  #interrupt-cells = <1>;
+  interrupt-map-mask = <0 0 0 0>;
+  interrupt-map = <0 0 0 0 &gic 0 60 4>;
+
+  brcm,coreid = <0>;
+ };
+
+ pcie1: pcie@80050000 {
+  compatible = "brcm,bcm963xx-pcie";
+  device_type = "pci";
+  reg = <0x80050000 0x0000A000>;
+
+  #address-cells = <3>;
+  #size-cells = <2>;
+
+  ranges = <0x02000000 0 0xA0000000 0xA0000000 0 0x10000000>;
+
+
+  interrupt-names = "intr";
+  interrupts = <0 61 4>;
+
+  #interrupt-cells = <1>;
+  interrupt-map-mask = <0 0 0 0>;
+  interrupt-map = <0 0 0 0 &gic 0 61 4>;
+
+  brcm,coreid = <1>;
+ };
+
+
+};

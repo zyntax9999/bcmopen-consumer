@@ -1,0 +1,1 @@
+cmd_net/netfilter/ipset/ip_set.o := /opt/toolchains//crosstools-arm-gcc-5.5-linux-4.1-glibc-2.26-binutils-2.28.1/usr/bin/arm-buildroot-linux-gnueabi-ld -EL   -r -o net/netfilter/ipset/ip_set.o net/netfilter/ipset/ip_set_core.o net/netfilter/ipset/ip_set_getport.o net/netfilter/ipset/pfxlen.o 

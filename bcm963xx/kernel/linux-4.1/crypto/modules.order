@@ -1,0 +1,8 @@
+kernel/crypto/seqiv.ko
+kernel/crypto/cmac.ko
+kernel/crypto/hmac.ko
+kernel/crypto/md4.ko
+kernel/crypto/md5.ko
+kernel/crypto/sha256_generic.ko
+kernel/crypto/ctr.ko
+kernel/crypto/ccm.ko

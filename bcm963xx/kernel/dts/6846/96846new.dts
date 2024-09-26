@@ -1,0 +1,160 @@
+/dts-v1/;
+
+/memreserve/	0x0000000000000000 0x0000000000008000;
+/memreserve/	0x0000000004000000 0x0000000000100000;
+/ {
+	model = "Broadcom BCM96846";
+	compatible = "brcm,bcm96846";
+	interrupt-parent = <0x01>;
+	#address-cells = <0x01>;
+	#size-cells = <0x01>;
+
+	reserved-memory {
+		#address-cells = <0x01>;
+		#size-cells = <0x01>;
+		ranges;
+
+		dt_reserved_rdp1 {
+			reg = <0x3000000 0x1000000>;
+			no-map;
+		};
+
+		dt_reserved_rdp2 {
+			reg = <0x2800000 0x800000>;
+			no-map;
+		};
+	};
+
+	cpus {
+		#address-cells = <0x01>;
+		#size-cells = <0x00>;
+
+		cpu@0 {
+			device_type = "cpu";
+			compatible = "arm,cortex-a7";
+			reg = <0x00>;
+			next-level-cache = <0x02>;
+			linux,phandle = <0x03>;
+			phandle = <0x03>;
+		};
+
+		cpu@1 {
+			device_type = "cpu";
+			compatible = "arm,cortex-a7";
+			reg = <0x01>;
+			next-level-cache = <0x02>;
+			enable-method = "brcm,bca-smp";
+			linux,phandle = <0x04>;
+			phandle = <0x04>;
+		};
+
+		l2-cache0 {
+			compatible = "cache";
+			linux,phandle = <0x02>;
+			phandle = <0x02>;
+		};
+	};
+
+	interrupt-controller@81000000 {
+		compatible = "arm,cortex-a7-gic";
+		#interrupt-cells = <0x03>;
+		#address-cells = <0x00>;
+		interrupt-controller;
+		reg = <0x81001000 0x1000 0x81002000 0x2000>;
+		linux,phandle = <0x01>;
+		phandle = <0x01>;
+	};
+
+	timer {
+		compatible = "arm,armv7-timer";
+		interrupts = <0x01 0x0d 0x308 0x01 0x0e 0x308 0x01 0x0b 0x308 0x01 0x0a 0x308>;
+		arm,cpu-registers-not-fw-configured = <0x01>;
+	};
+
+	pmu {
+		compatible = "arm,cortex-a7-pmu";
+		interrupts = <0x00 0x09 0x04 0x00 0x0a 0x04>;
+		interrupt-affinity = <0x03 0x04>;
+	};
+
+	brcm-legacy {
+		compatible = "brcm,brcm-legacy";
+	};
+
+	chosen {
+		bootargs = "coherent_pool=2M cpuidle_sysfs_switch pci=pcie_bus_safe";
+	};
+
+	memory@00000000 {
+		device_type = "memory";
+		reg = <0x00 0x4000000>;
+	};
+
+	ubus@ff800000 {
+		compatible = "simple-bus";
+		#address-cells = <0x01>;
+		#size-cells = <0x01>;
+		ranges = <0x00 0xff800000 0x8000>;
+
+		nand@ff801800 {
+			#address-cells = <0x01>;
+			#size-cells = <0x00>;
+			compatible = "brcm,nand-bcm63xx\0brcm,brcmnand-v7.1";
+			reg = <0x1800 0x600 0x2000 0x10>;
+			reg-names = "nand\0nand-int-base";
+			status = "okay";
+
+			nandcs@0 {
+				compatible = "brcm,nandcs";
+				reg = <0x00>;
+				nand-on-flash-bbt;
+			};
+		};
+
+		watchdog@480 {
+			compatible = "brcm,bcm96xxx-wdt";
+			reg = <0x480 0x10>;
+			timeout-sec = <0x50>;
+		};
+
+		i2c@0xff802100 {
+			compatible = "brcm,bcm63000-i2c";
+			reg = <0x2100 0x60>;
+		};
+
+		rng@ff800b80 {
+			compatible = "brcm,iproc-rng200";
+			reg = <0xb80 0x28>;
+		};
+	};
+
+	pcie@80040000 {
+		compatible = "brcm,bcm963xx-pcie";
+		device_type = "pci";
+		reg = <0x80040000 0xa000>;
+		#address-cells = <0x03>;
+		#size-cells = <0x02>;
+		ranges = <0x2000000 0x00 0x90000000 0x90000000 0x00 0x10000000>;
+		interrupt-names = "intr";
+		interrupts = <0x00 0x3c 0x04>;
+		#interrupt-cells = <0x01>;
+		interrupt-map-mask = <0x00 0x00 0x00 0x00>;
+		interrupt-map = <0x00 0x00 0x00 0x00 0x01 0x00 0x3c 0x04>;
+		brcm,coreid = <0x00>;
+	};
+
+	pcie@80050000 {
+		compatible = "brcm,bcm963xx-pcie";
+		device_type = "pci";
+		reg = <0x80050000 0xa000>;
+		#address-cells = <0x03>;
+		#size-cells = <0x02>;
+		ranges = <0x2000000 0x00 0xa0000000 0xa0000000 0x00 0x10000000>;
+		interrupt-names = "intr";
+		interrupts = <0x00 0x3d 0x04>;
+		#interrupt-cells = <0x01>;
+		interrupt-map-mask = <0x00 0x00 0x00 0x00>;
+		interrupt-map = <0x00 0x00 0x00 0x00 0x01 0x00 0x3d 0x04>;
+		brcm,coreid = <0x01>;
+	};
+};

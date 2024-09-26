@@ -1,0 +1,2 @@
+kernel/../../bcmdrivers/opensource/net/enet/bcm96846/enet_ingress/bcm_enet_ingress.ko
+kernel/../../bcmdrivers/opensource/net/enet/bcm96846/bcm_enet.ko

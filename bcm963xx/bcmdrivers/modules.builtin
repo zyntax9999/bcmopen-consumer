@@ -1,0 +1,6 @@
+kernel/../../bcmdrivers/opensource/char/i2c/busses/bcm96846/i2c_bcm6xxx.ko
+kernel/../../bcmdrivers/opensource/char/i2c/chips/bcm96846/bcmsfp_i2c.ko
+kernel/../../bcmdrivers/opensource/char/opticaldet/bcm96846/opticaldet.ko
+kernel/../../bcmdrivers/opensource/char/plat-bcm/bcm96846/blxargs.ko
+kernel/../../bcmdrivers/opensource/char/plat-bcm/bcm96846/bcm_i2c.ko
+kernel/../../bcmdrivers/opensource/char/serial/bcm96846/bcm63xx_cons.ko

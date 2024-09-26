@@ -1,0 +1,1 @@
+cmd_sound/core/snd.o := /opt/toolchains//crosstools-arm-gcc-5.5-linux-4.1-glibc-2.26-binutils-2.28.1/usr/bin/arm-buildroot-linux-gnueabi-ld -EL   -r -o sound/core/snd.o sound/core/sound.o sound/core/init.o sound/core/memory.o sound/core/info.o sound/core/control.o sound/core/misc.o sound/core/device.o sound/core/sound_oss.o sound/core/info_oss.o 

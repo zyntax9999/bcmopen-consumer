@@ -1,0 +1,7 @@
+96846.o: \
+ /home/zyntax/firmwarehacks/devel/bcmopen-consumerworks/bcm963xx/kernel/dts/6846/96846.dts \
+ arch/arm/boot/dts/include/dt-bindings/interrupt-controller/arm-gic.h \
+ arch/arm/boot/dts/include/dt-bindings/interrupt-controller/irq.h \
+ arch/arm/boot/dts/include/dt-bindings/soc/bcm963xx_dt_bindings.h \
+ /home/zyntax/firmwarehacks/devel/bcmopen-consumerworks/bcm963xx/kernel/dts/6846/../../../shared/opensource/include/pmc/pmc_firmware_68460.h \
+ /home/zyntax/firmwarehacks/devel/bcmopen-consumerworks/bcm963xx/kernel/dts/6846/../bcm_rsvdmem_32.dtsi

@@ -1,0 +1,1 @@
+cmd_net/sunrpc/built-in.o :=  /opt/toolchains//crosstools-arm-gcc-5.5-linux-4.1-glibc-2.26-binutils-2.28.1/usr/bin/arm-buildroot-linux-gnueabi-ld -EL   -r -o net/sunrpc/built-in.o net/sunrpc/sunrpc.o net/sunrpc/xprtrdma/built-in.o 

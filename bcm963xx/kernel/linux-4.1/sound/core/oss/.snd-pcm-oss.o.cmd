@@ -1,0 +1,1 @@
+cmd_sound/core/oss/snd-pcm-oss.o := /opt/toolchains//crosstools-arm-gcc-5.5-linux-4.1-glibc-2.26-binutils-2.28.1/usr/bin/arm-buildroot-linux-gnueabi-ld -EL   -r -o sound/core/oss/snd-pcm-oss.o sound/core/oss/pcm_oss.o 

@@ -1,0 +1,1 @@
+cmd_../../bcmdrivers/broadcom/char/pmd/bcm96846/pmd.ko := /opt/toolchains//crosstools-arm-gcc-5.5-linux-4.1-glibc-2.26-binutils-2.28.1/usr/bin/arm-buildroot-linux-gnueabi-ld -EL -r  -T ./scripts/module-common.lds --build-id  -o ../../bcmdrivers/broadcom/char/pmd/bcm96846/pmd.ko ../../bcmdrivers/broadcom/char/pmd/bcm96846/pmd.o ../../bcmdrivers/broadcom/char/pmd/bcm96846/pmd.mod.o

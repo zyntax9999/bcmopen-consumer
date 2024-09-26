@@ -1,0 +1,22 @@
+--- # YAML format
+ignore: 1 # Delete this line and other comments below when adding a patch for the first time
+
+version: '5'
+release: '02'
+extraversion: '07_P1'
+
+platforms_in_use:
+# one row per platform starting with hiphen+space e.g. - 63138
+- 63158
+- 63138
+- 6858
+- 6846
+- 6752
+- 6755
+- 6750
+
+
+patches:
+# one row per patch starting with hiphen+space e.g.:
+- {csp: CS9683583, ref: SWBCACPE-38836, chg: CL263179}
+- {csp: CS00010802251, ref: SWBCACPE-39480, chg: CL288560}

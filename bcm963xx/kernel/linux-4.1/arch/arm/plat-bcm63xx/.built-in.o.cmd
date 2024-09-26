@@ -1,0 +1,1 @@
+cmd_arch/arm/plat-bcm63xx/built-in.o :=  /opt/toolchains//crosstools-arm-gcc-5.5-linux-4.1-glibc-2.26-binutils-2.28.1/usr/bin/arm-buildroot-linux-gnueabi-ld -EL   -r -o arch/arm/plat-bcm63xx/built-in.o arch/arm/plat-bcm63xx/bcm6846.o arch/arm/plat-bcm63xx/hotplug.o arch/arm/plat-bcm63xx/platsmp.o arch/arm/plat-bcm63xx/plat-ca9mp-headsmp.o 
