@@ -4,3 +4,4 @@ bcm963xx/kernel/linux-4.1/vmlinux.o filter=lfs diff=lfs merge=lfs -text
 bcm963xx/kernel/linux-4.1/.tmp_vmlinux1 filter=lfs diff=lfs merge=lfs -text
 bcm963xx/kernel/linux-4.1/.tmp_vmlinux2 filter=lfs diff=lfs merge=lfs -text
 bcm963xx/kernel/linux-4.1/vmlinux filter=lfs diff=lfs merge=lfs -text
+.tmp_vmlinux* filter=lfs diff=lfs merge=lfs -text
